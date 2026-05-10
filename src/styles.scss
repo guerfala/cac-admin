@@ -1,1 +1,218 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Outfit', sans-serif; background: #f1f5f9; color: #1e293b; }
+
+// ─── SHARED ADMIN STYLES ───
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.page-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 32px;
+  letter-spacing: 1px;
+  color: #1e293b;
+}
+
+.page-subtitle {
+  font-size: 14px;
+  color: #94a3b8;
+  margin-top: 4px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  svg { width: 18px; height: 18px; }
+}
+
+.btn-primary {
+  background: #efb01f;
+  color: #1e293b;
+  &:hover { background: #c8940f; }
+}
+
+.btn-danger {
+  background: #bd1120;
+  color: #fff;
+  &:hover { background: #8f0c18; }
+}
+
+.btn-secondary {
+  background: #e2e8f0;
+  color: #475569;
+  &:hover { background: #cbd5e1; }
+}
+
+.btn-sm { padding: 6px 12px; font-size: 13px; }
+
+// ─── CARD ───
+.card {
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  padding: 24px;
+}
+
+// ─── TABLE ───
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+
+  th {
+    text-align: left;
+    padding: 14px 16px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #64748b;
+    background: #f8fafc;
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  td {
+    padding: 14px 16px;
+    font-size: 14px;
+    color: #475569;
+    border-bottom: 1px solid #f1f5f9;
+    vertical-align: middle;
+  }
+
+  tr:hover td { background: #f8fafc; }
+
+  .table-photo {
+    width: 44px;
+    height: 44px;
+    border-radius: 8px;
+    object-fit: cover;
+  }
+
+  .table-actions {
+    display: flex;
+    gap: 8px;
+  }
+
+  .btn-icon {
+    width: 34px;
+    height: 34px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+
+    svg { width: 16px; height: 16px; }
+
+    &.edit { background: #eff6ff; color: #3b82f6; &:hover { background: #dbeafe; } }
+    &.delete { background: #fef2f2; color: #ef4444; &:hover { background: #fee2e2; } }
+  }
+}
+
+// ─── MODAL ───
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal {
+  background: #fff;
+  border-radius: 16px;
+  padding: 32px;
+  width: 100%;
+  max-width: 520px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+}
+
+.modal-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 26px;
+  letter-spacing: 1px;
+  margin-bottom: 24px;
+  color: #1e293b;
+}
+
+.form-group {
+  margin-bottom: 16px;
+
+  label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: #475569;
+    margin-bottom: 6px;
+  }
+
+  input, textarea, select {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 14px;
+    color: #1e293b;
+    transition: border-color 0.2s;
+
+    &:focus { outline: none; border-color: #efb01f; }
+  }
+
+  textarea { min-height: 80px; resize: vertical; }
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.file-input-wrapper {
+  position: relative;
+  border: 2px dashed #e2e8f0;
+  border-radius: 8px;
+  padding: 24px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover { border-color: #efb01f; background: #fffbeb; }
+
+  input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+
+  .file-label {
+    font-size: 13px;
+    color: #94a3b8;
+    span { color: #efb01f; font-weight: 600; }
+  }
+}
+
+.preview-img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-top: 8px;
+}
