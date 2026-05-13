@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ApiService } from '../../services/api.service';
@@ -17,12 +17,15 @@ export class DirigeantsPage implements OnInit {
   selectedFile: File | null = null;
   previewUrl: string | null = null;
 
-  constructor(public api: ApiService) {}
+  constructor(public api: ApiService, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void { this.load(); }
 
   load(): void {
-    this.api.getDirigeants().subscribe(data => this.items = data);
+    this.api.getDirigeants().subscribe(data => {
+    this.items = data;
+    this.cdr.detectChanges();   // ← ajouter
+  });;
   }
 
   openCreate(): void {

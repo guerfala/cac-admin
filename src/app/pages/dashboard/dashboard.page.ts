@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ApiService } from '../../services/api.service';
 
@@ -73,7 +73,7 @@ import { ApiService } from '../../services/api.service';
 export class DashboardPage implements OnInit {
   statCards: any[] = [];
 
-  constructor(private api: ApiService) {}
+  constructor(private api: ApiService, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.api.getStats().subscribe((stats: any) => {
@@ -82,7 +82,8 @@ export class DashboardPage implements OnInit {
         { label: 'Entraîneurs', value: stats.entraineurs, icon: 'sports', color: '#10b981', bg: '#ecfdf5' },
         { label: 'Actualités', value: stats.actualites, icon: 'article', color: '#f59e0b', bg: '#fffbeb' },
         { label: 'Albums photos', value: stats.albums + ' (' + stats.photos + ' photos)', icon: 'photo', color: '#8b5cf6', bg: '#f5f3ff' },
-      ];
+      ];;
+      this.cdr.detectChanges();
     });
   }
 }

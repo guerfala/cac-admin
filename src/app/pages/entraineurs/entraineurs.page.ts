@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ApiService } from '../../services/api.service';
@@ -71,9 +71,12 @@ export class EntraineursPage implements OnInit {
   selectedFile: File | null = null;
   previewUrl: string | null = null;
 
-  constructor(public api: ApiService) {}
+  constructor(public api: ApiService, private cdr: ChangeDetectorRef) {}
   ngOnInit(): void { this.load(); }
-  load(): void { this.api.getEntraineurs().subscribe(d => this.items = d); }
+  load(): void { this.api.getEntraineurs().subscribe(data => {
+    this.items = data;
+    this.cdr.detectChanges();   // ← ajouter
+  }); }
 
   openCreate(): void { this.editing = false; this.form = { nom: '', specialite: '', ordre: this.items.length + 1 }; this.selectedFile = null; this.previewUrl = null; this.showModal = true; }
   openEdit(item: any): void { this.editing = true; this.form = { ...item }; this.selectedFile = null; this.previewUrl = item.photo ? this.api.getImageUrl(item.photo) : null; this.showModal = true; }

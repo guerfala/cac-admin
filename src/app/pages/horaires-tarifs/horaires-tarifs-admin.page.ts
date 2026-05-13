@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ApiService } from '../../services/api.service';
@@ -142,7 +142,7 @@ export class HorairesTarifsAdminPage implements OnInit {
   editingTarif = false;
   tarifForm: any = {};
 
-  constructor(private api: ApiService) {}
+  constructor(private api: ApiService, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.loadAll();
@@ -151,8 +151,14 @@ export class HorairesTarifsAdminPage implements OnInit {
   loadAll(): void {
     this.api.getSetting('saison').subscribe({ next: (s: any) => this.saison = s.valeur, error: () => this.saison = '25/26' });
     this.api.getSetting('tarifs_note').subscribe({ next: (s: any) => this.tarifsNote = s.valeur, error: () => {} });
-    this.api.getCategories().subscribe(d => this.categories = d);
-    this.api.getTarifs().subscribe(d => this.tarifs = d);
+    this.api.getCategories().subscribe(d => {
+      this.categories = d;
+      this.cdr.detectChanges();
+    });
+    this.api.getTarifs().subscribe(d => {
+      this.tarifs = d;
+      this.cdr.detectChanges();
+    });
   }
 
   getHoraires(h: string): string[] {

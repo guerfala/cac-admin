@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ApiService } from '../../services/api.service';
@@ -210,9 +210,12 @@ export class AlbumsPage implements OnInit {
   createPhotoPreviews: { url: string }[] = [];
   coverIndex = 0;
 
-  constructor(public api: ApiService) {}
+  constructor(public api: ApiService, private cdr: ChangeDetectorRef) {}
   ngOnInit(): void { this.load(); }
-  load(): void { this.api.getAlbums().subscribe(d => this.items = d); }
+  load(): void { this.api.getAlbums().subscribe(data => {
+    this.items = data;
+    this.cdr.detectChanges();   // ← ajouter
+  }); }
 
   openCreate(): void {
     this.editing = false;

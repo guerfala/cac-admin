@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ApiService } from '../../services/api.service';
@@ -68,9 +68,12 @@ export class CongesPage implements OnInit {
   editing = false;
   form: any = {};
 
-  constructor(private api: ApiService) {}
+  constructor(private api: ApiService, private cdr: ChangeDetectorRef) {}
   ngOnInit(): void { this.load(); }
-  load(): void { this.api.getConges().subscribe(d => this.items = d); }
+  load(): void { this.api.getConges().subscribe(data => {
+    this.items = data;
+    this.cdr.detectChanges();   // ← ajouter
+  }); }
 
   openCreate(): void { this.editing = false; this.form = { nom: '', dateDebut: '', dateFin: '', saison: '2024 — 2025', icon: 'leaf', ordre: this.items.length + 1 }; this.showModal = true; }
   openEdit(item: any): void { this.editing = true; this.form = { ...item }; this.showModal = true; }

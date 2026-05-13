@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ApiService } from '../../services/api.service';
@@ -67,9 +67,12 @@ export class ActualitesPage implements OnInit {
   selectedFile: File | null = null;
   previewUrl: string | null = null;
 
-  constructor(public api: ApiService) {}
+  constructor(public api: ApiService, private cdr: ChangeDetectorRef) {}
   ngOnInit(): void { this.load(); }
-  load(): void { this.api.getActualites().subscribe(d => this.items = d); }
+  load(): void { this.api.getActualites().subscribe(data => {
+    this.items = data;
+    this.cdr.detectChanges();   // ← ajouter
+  }); }
 
   openCreate(): void { this.editing = false; this.form = { titre: '', extrait: '', contenu: '', tag: 'Club', date: new Date().toISOString().split('T')[0] }; this.selectedFile = null; this.previewUrl = null; this.showModal = true; }
   openEdit(item: any): void { this.editing = true; this.form = { ...item }; this.selectedFile = null; this.previewUrl = item.image ? this.api.getImageUrl(item.image) : null; this.showModal = true; }
