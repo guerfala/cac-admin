@@ -6,6 +6,7 @@ import { EntraineursPage } from './pages/entraineurs/entraineurs.page';
 import { ActualitesPage } from './pages/actualites/actualites.page';
 import { CongesPage } from './pages/conges/conges.page';
 import { AlbumsPage } from './pages/albums/albums.page';
+import { HorairesTarifsAdminPage } from './pages/horaires-tarifs/horaires-tarifs-admin.page';
 import { LoginPage } from './pages/login/login.page';
 import { ForgotPasswordPage } from './pages/forgot-password/forgot-password.page';
 import { authGuard } from './guards/auth.guard';
@@ -23,6 +24,7 @@ export const routes: Routes = [
       { path: 'dirigeants', component: DirigeantsPage },
       { path: 'entraineurs', component: EntraineursPage },
       { path: 'actualites', component: ActualitesPage },
+      { path: 'horaires-tarifs', component: HorairesTarifsAdminPage },
       { path: 'conges', component: CongesPage },
       { path: 'albums', component: AlbumsPage },
     ],

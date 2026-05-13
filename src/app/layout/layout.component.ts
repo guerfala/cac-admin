@@ -19,6 +19,7 @@ export class LayoutComponent implements OnInit {
     { label: 'Dirigeants', icon: 'people', route: '/dirigeants' },
     { label: 'Entraîneurs', icon: 'sports', route: '/entraineurs' },
     { label: 'Actualités', icon: 'article', route: '/actualites' },
+    { label: 'Horaires & Tarifs', icon: 'clock', route: '/horaires-tarifs' },
     { label: 'Congés scolaires', icon: 'calendar', route: '/conges' },
     { label: 'Albums photos', icon: 'photo', route: '/albums' },
   ];

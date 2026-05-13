@@ -10,29 +10,50 @@ export class ApiService {
 
   getStats(): Observable<any> { return this.http.get(`${this.base}/dashboard/stats`); }
 
+  // ─── Settings ───
+  getSetting(cle: string): Observable<any> { return this.http.get(`${this.base}/settings/${cle}`); }
+  updateSetting(cle: string, valeur: string): Observable<any> { return this.http.put(`${this.base}/settings/${cle}`, { valeur }); }
+
+  // ─── Catégories Horaires ───
+  getCategories(): Observable<any[]> { return this.http.get<any[]>(`${this.base}/categories`); }
+  createCategorie(data: any): Observable<any> { return this.http.post(`${this.base}/categories`, data); }
+  updateCategorie(id: number, data: any): Observable<any> { return this.http.put(`${this.base}/categories/${id}`, data); }
+  deleteCategorie(id: number): Observable<any> { return this.http.delete(`${this.base}/categories/${id}`); }
+
+  // ─── Tarifs ───
+  getTarifs(): Observable<any[]> { return this.http.get<any[]>(`${this.base}/tarifs`); }
+  createTarif(data: any): Observable<any> { return this.http.post(`${this.base}/tarifs`, data); }
+  updateTarif(id: number, data: any): Observable<any> { return this.http.put(`${this.base}/tarifs/${id}`, data); }
+  deleteTarif(id: number): Observable<any> { return this.http.delete(`${this.base}/tarifs/${id}`); }
+
+  // ─── Dirigeants ───
   getDirigeants(): Observable<any[]> { return this.http.get<any[]>(`${this.base}/dirigeants`); }
   getDirigeant(id: number): Observable<any> { return this.http.get(`${this.base}/dirigeants/${id}`); }
   createDirigeant(data: FormData): Observable<any> { return this.http.post(`${this.base}/dirigeants`, data); }
   updateDirigeant(id: number, data: FormData): Observable<any> { return this.http.put(`${this.base}/dirigeants/${id}`, data); }
   deleteDirigeant(id: number): Observable<any> { return this.http.delete(`${this.base}/dirigeants/${id}`); }
 
+  // ─── Entraineurs ───
   getEntraineurs(): Observable<any[]> { return this.http.get<any[]>(`${this.base}/entraineurs`); }
   getEntraineur(id: number): Observable<any> { return this.http.get(`${this.base}/entraineurs/${id}`); }
   createEntraineur(data: FormData): Observable<any> { return this.http.post(`${this.base}/entraineurs`, data); }
   updateEntraineur(id: number, data: FormData): Observable<any> { return this.http.put(`${this.base}/entraineurs/${id}`, data); }
   deleteEntraineur(id: number): Observable<any> { return this.http.delete(`${this.base}/entraineurs/${id}`); }
 
+  // ─── Actualités ───
   getActualites(): Observable<any[]> { return this.http.get<any[]>(`${this.base}/actualites`); }
   getActualite(id: number): Observable<any> { return this.http.get(`${this.base}/actualites/${id}`); }
   createActualite(data: FormData): Observable<any> { return this.http.post(`${this.base}/actualites`, data); }
   updateActualite(id: number, data: FormData): Observable<any> { return this.http.put(`${this.base}/actualites/${id}`, data); }
   deleteActualite(id: number): Observable<any> { return this.http.delete(`${this.base}/actualites/${id}`); }
 
+  // ─── Congés ───
   getConges(): Observable<any[]> { return this.http.get<any[]>(`${this.base}/conges`); }
   createConge(data: any): Observable<any> { return this.http.post(`${this.base}/conges`, data); }
   updateConge(id: number, data: any): Observable<any> { return this.http.put(`${this.base}/conges/${id}`, data); }
   deleteConge(id: number): Observable<any> { return this.http.delete(`${this.base}/conges/${id}`); }
 
+  // ─── Albums ───
   getAlbums(): Observable<any[]> { return this.http.get<any[]>(`${this.base}/albums`); }
   getAlbum(id: number): Observable<any> { return this.http.get(`${this.base}/albums/${id}`); }
   createAlbum(data: FormData): Observable<any> { return this.http.post(`${this.base}/albums`, data); }
@@ -40,9 +61,7 @@ export class ApiService {
   deleteAlbum(id: number): Observable<any> { return this.http.delete(`${this.base}/albums/${id}`); }
   addPhotos(albumId: number, data: FormData): Observable<any> { return this.http.post(`${this.base}/albums/${albumId}/photos`, data); }
   deletePhoto(albumId: number, photoId: number): Observable<any> { return this.http.delete(`${this.base}/albums/${albumId}/photos/${photoId}`); }
-  updateAlbumCover(albumId: number, photoSrc: string): Observable<any> {
-    return this.http.put(`${this.base}/albums/${albumId}/cover`, { couverture: photoSrc });
-  }
+  updateAlbumCover(albumId: number, photoSrc: string): Observable<any> { return this.http.put(`${this.base}/albums/${albumId}/cover`, { couverture: photoSrc }); }
 
   getImageUrl(path: string): string { return path ? `http://localhost:8080${path}` : ''; }
 }
